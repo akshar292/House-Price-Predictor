@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 import pickle
 
 app = FastAPI()
@@ -23,10 +24,10 @@ class HouseData(BaseModel):
     bedrooms: int
     age_years: int
 
-# Home Route
+# Serve Frontend
 @app.get("/")
 def home():
-    return {"message": "House Price Predictor API Running"}
+    return FileResponse("index.html")
 
 # Prediction Route
 @app.post("/predict")
